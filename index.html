@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday, booo! ❤️</title>
+    <title>Happy Birthday my love 🎂</title>
     <style>
         body {
             background-color: #ffe6e6; 
@@ -18,21 +18,81 @@
             position: relative;
         }
 
-        /* The Gift Box */
-        #gift-box {
-            font-size: 100px;
-            cursor: pointer;
-            transition: transform 0.2s ease-in-out;
-            animation: bounce 2s infinite;
+        /* --- STAGE 1: The Cake & Candles --- */
+        #candle-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             z-index: 10;
-            -webkit-tap-highlight-color: transparent; 
         }
 
-        #gift-box:hover {
-            transform: scale(1.1) rotate(5deg);
+        #candle-stage h1 {
+            color: #ff4d4d;
+            font-size: 32px;
+            margin-bottom: 5px;
         }
 
-        /* The Surprise Inside */
+        #candle-stage p.instruction {
+            color: #777;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .cake-container {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .candles {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: -40px; /* Pulls candles down to sit on the cake */
+            z-index: 2;
+            position: relative;
+        }
+
+        .candle {
+            font-size: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            animation: flicker 1s infinite alternate;
+        }
+
+        .candle:hover {
+            transform: scale(1.1);
+        }
+
+        /* When a candle is clicked/blown out */
+        .candle.blown {
+            filter: grayscale(100%);
+            opacity: 0.3;
+            transform: scale(0.9);
+            pointer-events: none; /* Prevents clicking again */
+            animation: none;
+        }
+
+        .cake-emoji {
+            font-size: 140px;
+            z-index: 1;
+        }
+
+        /* The Love Quotes Display */
+        #quote-display {
+            min-height: 60px;
+            font-size: 20px;
+            color: #ff4d4d;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 25px;
+            padding: 0 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            max-width: 350px;
+        }
+
+        /* --- STAGE 2: The Final Surprise --- */
         #surprise {
             display: none;
             opacity: 0;
@@ -44,27 +104,25 @@
             box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
             width: 90%; 
             max-width: 420px; 
-            max-height: 90vh; /* Prevents it from being too tall on small screens */
-            overflow-y: auto; /* Lets her scroll if the screen is super small */
+            max-height: 90vh;
+            overflow-y: auto;
             z-index: 10;
             box-sizing: border-box;
         }
 
-        /* Reveal Animation */
         .show-surprise {
             display: flex !important;
             animation: fadeIn 1.5s forwards;
         }
 
-        h1 { 
+        #surprise h1 { 
             color: #ff4d4d; 
             margin-bottom: 5px; 
             font-size: 28px; 
             margin-top: 0;
         }
         
-        /* The Text - Now longer and more romantic */
-        p { 
+        #surprise p { 
             color: #444; 
             line-height: 1.6; 
             font-size: 16px; 
@@ -72,27 +130,23 @@
             padding: 0 10px;
         }
         
-        /* FIXED IMAGE - No more cropping! Keeps original proportions */
         img {
             width: 100%; 
             max-width: 280px; 
-            height: auto; /* This prevents the cropping */
+            height: auto; 
             border-radius: 15px;
             margin: 15px 0;
             border: 3px solid #ff4d4d;
             box-shadow: 0px 5px 15px rgba(255, 77, 77, 0.3);
         }
 
-        .cake { font-size: 50px; margin: 0; }
-
-        /* The Beating Love Heart */
         .beating-heart {
             font-size: 45px;
             margin-top: 10px;
             animation: pulse 1s infinite;
         }
 
-        /* Falling Roses & Hearts Animation */
+        /* Animations */
         .falling-item {
             position: absolute;
             top: -10%;
@@ -109,45 +163,55 @@
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(110vh) rotate(360deg);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-30px); }
-            60% { transform: translateY(-15px); }
+            to { transform: translateY(110vh) rotate(360deg); }
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.8); }
             to { opacity: 1; transform: scale(1); }
         }
+
+        @keyframes flicker {
+            from { transform: rotate(-2deg); }
+            to { transform: rotate(2deg); }
+        }
         
         @media (max-width: 350px) {
-            h1 { font-size: 24px; }
-            #gift-box { font-size: 80px; }
-            p { font-size: 14.5px; }
+            #candle-stage h1 { font-size: 26px; }
+            .cake-emoji { font-size: 110px; }
+            .candle { font-size: 50px; }
+            #surprise h1 { font-size: 24px; }
+            #surprise p { font-size: 14.5px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="gift-box" onclick="openGift()">
-        🎁<br>
-        <span style="font-size: 20px; color: #ff4d4d; font-weight: bold;">Tap to open!</span>
+    <!-- STAGE 1: Interactive Candles -->
+    <div id="candle-stage">
+        <h1>Happy Birthday my love 🎂</h1>
+        <p class="instruction">Tap the candles to blow them out...</p>
+        
+        <div class="cake-container">
+            <div class="candles">
+                <div class="candle" onclick="blowCandle(this, 0)">🕯️</div>
+                <div class="candle" onclick="blowCandle(this, 1)">🕯️</div>
+                <div class="candle" onclick="blowCandle(this, 2)">🕯️</div>
+            </div>
+            <div class="cake-emoji">🎂</div>
+        </div>
+
+        <div id="quote-display"></div>
     </div>
 
+    <!-- STAGE 2: The Reveal -->
     <div id="surprise">
-        <h1>Happy Birthday!</h1>
-        
-        <div class="cake">🎂</div>
+        <h1>Happy Birthday my love 🎂</h1>
         
         <!-- Un-cropped photo -->
         <img src="photo.jpg" alt="Us">
         
-        <!-- Expanded Love Words -->
+        <!-- Love Words -->
         <p>
             To my beautiful booo, <br><br>
             Every single day with you is a blessing, and I am so incredibly grateful to have you in my life. You are my sunshine, my biggest supporter, and my absolute favorite person in the whole world. 
@@ -155,17 +219,60 @@
             I hope your special day is filled with as much joy, pure love, and happiness as you bring to my life every day. I love you more than words can ever express, today and always!
         </p>
 
-        <!-- The Beating Love Heart -->
         <div class="beating-heart">❤️</div>
     </div>
 
+    <!-- Audio File -->
     <audio id="bday-song" src="song.mp3"></audio>
 
     <script>
+        let blownCount = 0;
+        
+        // The quotes that appear for each candle
+        const loveQuotes = [
+            "Your smile is my favorite thing in the world. ✨",
+            "Every moment with you feels like pure magic. 💖",
+            "I love you more than anything, my booo. 🌹"
+        ];
+
+        function blowCandle(element, index) {
+            // Prevent double-taps
+            if (element.classList.contains('blown')) return;
+            
+            // Blow out the candle visually
+            element.classList.add('blown');
+            blownCount++;
+            
+            // Display the matching quote with a fade-in effect
+            const quoteDisplay = document.getElementById('quote-display');
+            quoteDisplay.style.opacity = 0;
+            
+            setTimeout(() => {
+                quoteDisplay.innerText = loveQuotes[index];
+                quoteDisplay.style.opacity = 1;
+            }, 200);
+
+            // If all 3 candles are blown out, trigger the final reveal
+            if (blownCount === 3) {
+                // Wait 2 seconds for her to read the final quote, then transition
+                setTimeout(() => {
+                    document.getElementById('candle-stage').style.display = 'none';
+                    document.getElementById('surprise').classList.add('show-surprise');
+                    
+                    // Play the song
+                    var audio = document.getElementById('bday-song');
+                    audio.play();
+                    
+                    // Start the falling roses
+                    setInterval(createFallingItem, 300);
+                }, 2500); 
+            }
+        }
+
+        // Falling Roses Logic
         function createFallingItem() {
             const item = document.createElement('div');
             
-            // Replaced white hearts with bright red and sparkling ones so they show up better
             const elements = ['🌹', '❤️', '💖', '✨'];
             item.innerText = elements[Math.floor(Math.random() * elements.length)];
             
@@ -180,16 +287,6 @@
             setTimeout(() => {
                 item.remove();
             }, 6000);
-        }
-
-        function openGift() {
-            document.getElementById('gift-box').style.display = 'none';
-            document.getElementById('surprise').classList.add('show-surprise');
-            
-            var audio = document.getElementById('bday-song');
-            audio.play();
-            
-            setInterval(createFallingItem, 300);
         }
     </script>
 </body>
