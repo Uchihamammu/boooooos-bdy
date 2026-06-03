@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday my love 🎂</title>
+    <title>Happy Birthday my booo 🎂</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            background-color: #ffe6e6; 
-            font-family: 'Arial', sans-serif;
+            /* Warmer, softer gradient background */
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%); 
+            font-family: 'Poppins', sans-serif; /* Soft modern font */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,30 +28,37 @@
             flex-direction: column;
             align-items: center;
             z-index: 10;
+            padding: 0 15px;
         }
 
+        /* Festive Intro Title */
         #candle-stage h1 {
-            color: #ff4d4d;
-            font-size: 32px;
-            margin-bottom: 5px;
+            font-family: 'Caveat', cursive;
+            color: #d63031;
+            font-size: 50px; /* Much bigger and warmer */
+            margin-bottom: 0px;
+            text-shadow: 1px 1px 2px rgba(214, 48, 49, 0.2);
+            line-height: 1.1;
         }
 
         #candle-stage p.instruction {
-            color: #777;
-            font-size: 16px;
-            margin-bottom: 20px;
+            color: #555;
+            font-size: 17px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            font-weight: 300;
         }
 
         .cake-container {
             position: relative;
-            margin: 20px 0;
+            margin: 15px 0;
         }
 
         .candles {
             display: flex;
             justify-content: center;
-            gap: 12px; 
-            margin-bottom: -25px; /* Pulls candles down into the cake */
+            gap: 22px; /* Increased gap so they aren't close together! */
+            margin-bottom: -25px; 
             z-index: 2;
             position: relative;
         }
@@ -55,7 +66,7 @@
         /* CUSTOM CSS CANDLES */
         .candle {
             position: relative;
-            padding: 25px 5px 10px 5px; /* Invisible tap padding */
+            padding: 25px 5px 10px 5px; 
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation; 
@@ -80,7 +91,6 @@
             transform: translateX(-50%);
         }
 
-        /* The Animated Flame */
         .flame {
             position: absolute;
             top: -5px;
@@ -95,35 +105,29 @@
             z-index: 3;
         }
 
-        /* When the candle is blown out */
-        .candle.blown .flame {
-            display: none; /* Fire vanishes instantly */
-        }
-        .candle.blown .wax {
-            background: #b3b3b3; /* Wax goes dark */
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-        }
+        .candle.blown .flame { display: none; }
+        .candle.blown .wax { background: #b3b3b3; box-shadow: inset 0 0 5px rgba(0,0,0,0.3); }
 
-        .shake {
-            animation: shake 0.4s ease-in-out !important;
-        }
+        .shake { animation: shake 0.4s ease-in-out !important; }
 
         .cake-emoji {
             font-size: 140px;
             z-index: 1;
         }
 
+        /* Upgraded, Warmer Love Quotes */
         #quote-display {
-            min-height: 60px;
-            font-size: 20px;
-            color: #ff4d4d;
-            font-weight: bold;
-            font-style: italic;
+            min-height: 80px;
+            font-family: 'Caveat', cursive; /* Handwritten feel */
+            font-size: 32px; /* Much larger */
+            color: #c23616; /* Richer, warmer red */
+            font-weight: 700;
             margin-top: 25px;
             padding: 0 20px;
             opacity: 0;
             transition: opacity 0.3s ease-in-out; 
-            max-width: 350px;
+            max-width: 380px;
+            line-height: 1.2;
         }
 
         /* --- STAGE 2: The Final Surprise --- */
@@ -132,10 +136,10 @@
             opacity: 0;
             flex-direction: column;
             align-items: center;
-            padding: 25px 20px;
-            background: white;
+            padding: 30px 25px;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0px 15px 35px rgba(214, 48, 49, 0.15); /* Soft pink shadow */
             width: 90%; 
             max-width: 420px; 
             max-height: 90vh;
@@ -150,17 +154,18 @@
         }
 
         #surprise h1 { 
-            color: #ff4d4d; 
+            font-family: 'Caveat', cursive;
+            color: #d63031; 
             margin-bottom: 5px; 
-            font-size: 28px; 
+            font-size: 42px; 
             margin-top: 0;
         }
         
         #surprise p { 
             color: #444; 
-            line-height: 1.6; 
-            font-size: 16px; 
-            margin: 10px 0;
+            line-height: 1.7; 
+            font-size: 17px; 
+            margin: 15px 0;
             padding: 0 10px;
         }
         
@@ -170,8 +175,8 @@
             height: auto; 
             border-radius: 15px;
             margin: 15px 0;
-            border: 3px solid #ff4d4d;
-            box-shadow: 0px 5px 15px rgba(255, 77, 77, 0.3);
+            border: 4px solid #ff7675;
+            box-shadow: 0px 8px 20px rgba(214, 48, 49, 0.2);
         }
 
         .beating-heart {
@@ -217,21 +222,22 @@
             75% { transform: translateX(5px) rotate(5deg); }
         }
         
-        @media (max-width: 350px) {
-            #candle-stage h1 { font-size: 26px; }
+        @media (max-width: 380px) {
+            #candle-stage h1 { font-size: 40px; }
             .cake-emoji { font-size: 110px; }
-            .wax { width: 20px; height: 50px; }
-            .gap { gap: 8px; }
-            #surprise h1 { font-size: 24px; }
-            #surprise p { font-size: 14.5px; }
+            .candles { gap: 12px; } /* Scales gap slightly on very small phones so they don't break off screen */
+            .wax { width: 22px; height: 55px; }
+            #quote-display { font-size: 26px; }
+            #surprise h1 { font-size: 36px; }
+            #surprise p { font-size: 15px; }
         }
     </style>
 </head>
 <body>
 
     <div id="candle-stage">
-        <h1>Happy Birthday my love 🎂</h1>
-        <p class="instruction">Blow them out from the outside in...</p>
+        <h1>Happy Birthday, Bhumika! 🎉</h1>
+        <p class="instruction">Make a wish, my beautiful booo... <br> <b>(Blow them out from the outside in! ✨)</b></p>
         
         <div class="cake-container">
             <div class="candles">
@@ -258,7 +264,7 @@
     </div>
 
     <div id="surprise">
-        <h1>Happy Birthday my love 🎂</h1>
+        <h1>Happy Birthday, my love!</h1>
         
         <img src="photo.jpg" alt="Us">
         
@@ -302,7 +308,6 @@
                     currentStep++;
 
                     if (currentStep === 5) {
-                        // Delay reduced to exactly 2 seconds!
                         setTimeout(() => {
                             document.getElementById('candle-stage').style.display = 'none';
                             document.getElementById('surprise').classList.add('show-surprise');
@@ -311,7 +316,7 @@
                             audio.play();
                             
                             setInterval(createFallingItem, 300);
-                        }, 2000); 
+                        }, 2500); // 2.5 seconds to read the last big text
                     }
                 }, 100);
             } else {
