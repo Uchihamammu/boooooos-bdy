@@ -48,7 +48,6 @@
             font-weight: 300;
         }
 
-        /* NEW CUSTOM CSS CAKE */
         .custom-cake {
             position: relative;
             display: flex;
@@ -61,7 +60,7 @@
             display: flex;
             justify-content: center;
             gap: 15px; 
-            margin-bottom: -15px; /* Sits them right on the icing */
+            margin-bottom: -15px; 
             z-index: 5;
             position: relative;
         }
@@ -69,7 +68,7 @@
         .cake-tier {
             width: 250px;
             height: 80px;
-            background-color: #ff9ff3; /* Soft pink cake */
+            background-color: #ff9ff3; 
             border-radius: 15px 15px 0 0;
             border: 4px solid #fff;
             border-bottom: none;
@@ -97,7 +96,6 @@
             z-index: 1;
         }
 
-        /* CANDLE STYLING */
         .candle {
             position: relative;
             padding: 25px 5px 10px 5px; 
@@ -144,7 +142,6 @@
 
         .shake { animation: shake 0.4s ease-in-out !important; }
 
-        /* THE NEW EXPLOSION PROPS ANIMATION */
         .prop-burst {
             position: absolute;
             font-size: 28px;
@@ -174,16 +171,25 @@
             opacity: 0;
             flex-direction: column;
             align-items: center;
-            padding: 30px 25px;
+            padding: 25px 20px; /* Reduced padding to give more internal space */
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             box-shadow: 0px 15px 35px rgba(214, 48, 49, 0.15); 
             width: 90%; 
             max-width: 420px; 
-            max-height: 90vh;
+            max-height: 85vh; /* Gives a little more room from the top/bottom of the screen */
             overflow-y: auto;
             z-index: 10;
             box-sizing: border-box;
+            
+            /* HIDES THE UGLY SCROLLBAR BUT KEEPS IT SCROLLABLE */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+
+        /* Hides scrollbar for Chrome, Safari and Opera */
+        #surprise::-webkit-scrollbar {
+            display: none;
         }
 
         .show-surprise {
@@ -202,40 +208,40 @@
         #surprise h1 { 
             font-family: 'Caveat', cursive;
             color: #d63031; 
-            margin-bottom: 5px; 
-            font-size: 42px; 
+            margin-bottom: 0px; /* Tighter margin so it breathes better */
+            font-size: 36px; /* Slightly smaller so it isn't overwhelming */
             margin-top: 0;
         }
         
         #surprise p { 
             color: #444; 
-            line-height: 1.7; 
-            font-size: 16px; 
-            margin: 15px 0;
-            padding: 0 10px;
+            line-height: 1.6; 
+            font-size: 15px; /* Perfect size for mobile readability */
+            margin: 10px 0;
+            padding: 0 5px;
         }
         
+        /* Image adjustments so it doesn't take up the whole screen */
         img {
             width: 100%; 
-            max-width: 250px; 
+            max-width: 200px; /* Shrunk slightly to fit beautifully */
             height: auto; 
             border-radius: 15px;
-            margin: 10px 0;
+            margin: 15px 0 10px 0;
             border: 4px solid #ff7675;
             box-shadow: 0px 8px 20px rgba(214, 48, 49, 0.2);
         }
 
-        /* Interactive Buttons */
         .action-btn {
             background-color: #d63031;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 10px 22px;
             font-family: 'Poppins', sans-serif;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: 25px;
-            margin-top: 15px;
+            margin-top: 10px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(214, 48, 49, 0.4);
             transition: transform 0.1s ease, background-color 0.2s ease;
@@ -247,26 +253,23 @@
             background-color: #b33939;
         }
 
-        /* Coupon Book Styles */
         .coupon {
             background: #fff0f0;
             border: 2px dashed #ff7675;
             border-radius: 12px;
             padding: 15px;
-            margin: 10px 0;
+            margin: 8px 0;
             text-align: left;
             width: 100%;
             box-sizing: border-box;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .coupon h3 { margin: 0 0 5px 0; color: #d63031; font-family: 'Poppins', sans-serif; font-size: 17px; }
-        .coupon p { margin: 0 !important; color: #555; font-size: 13.5px !important; line-height: 1.4 !important; padding: 0 !important; }
+        .coupon h3 { margin: 0 0 5px 0; color: #d63031; font-family: 'Poppins', sans-serif; font-size: 16px; }
+        .coupon p { margin: 0 !important; color: #555; font-size: 13px !important; line-height: 1.4 !important; padding: 0 !important; }
 
-        .beating-heart { font-size: 45px; margin-top: 10px; animation: pulse 1s infinite; }
         .falling-item { position: absolute; top: -10%; z-index: 1; user-select: none; pointer-events: none; animation: fall linear forwards; }
 
-        /* Animations */
         @keyframes popOut {
             0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
             100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5); opacity: 0; }
@@ -278,20 +281,20 @@
             100% { transform: translateX(-50%) scale(0.9) rotate(-1deg); opacity: 0.8; }
         }
 
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px) rotate(-5deg); } 75% { transform: translateX(5px) rotate(5deg); } }
         
         @media (max-width: 380px) {
-            #candle-stage h1 { font-size: 40px; }
+            #candle-stage h1 { font-size: 36px; }
             .cake-tier { width: 220px; }
             .cake-plate { width: 260px; }
             .candles { gap: 10px; } 
             .wax { width: 18px; height: 55px; }
-            #quote-display { font-size: 26px; }
-            #surprise h1 { font-size: 36px; }
+            #quote-display { font-size: 24px; }
+            #surprise h1 { font-size: 32px; }
             #surprise p { font-size: 14px; }
+            img { max-width: 180px; } /* Shrinks image more on very tiny phones */
         }
     </style>
 </head>
@@ -331,7 +334,7 @@
 
         <div id="coupon-content" class="content-wrapper" style="display: none;">
             <h1>Your Gift Book 🎟️</h1>
-            <p style="margin-bottom: 20px; font-weight: 600;">Since I can't be there with you today, screenshot these to redeem them anytime you want!</p>
+            <p style="margin-bottom: 15px; font-weight: 600; font-size: 14px;">Since I can't be there with you today, screenshot these to redeem them anytime you want!</p>
             
             <div class="coupon">
                 <h3>🎬 Ultimate Movie Night</h3>
@@ -364,19 +367,17 @@
             "And the last one for my booo forever! ❤️"
         ];
 
-        // Specific props tied to each quote!
         const propSets = [
-            ['✨', '⭐', '💫'], // Step 0: Sparkles
-            ['💖', '💕', '💗'], // Step 1: Pink Hearts
-            ['🌸', '🌺', '🌷'], // Step 2: Flowers
-            ['🦋', '💙', '✨'], // Step 3: Butterflies
-            ['❤️', '🎉', '🎈']  // Step 4: Red Hearts & Party
+            ['✨', '⭐', '💫'], 
+            ['💖', '💕', '💗'], 
+            ['🌸', '🌺', '🌷'], 
+            ['🦋', '💙', '✨'], 
+            ['❤️', '🎉', '🎈']  
         ];
 
         function triggerPropBurst(element, step) {
             const props = propSets[step];
             const rect = element.getBoundingClientRect();
-            // Center the burst on the candle
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
 
@@ -385,11 +386,10 @@
                 prop.innerText = props[Math.floor(Math.random() * props.length)];
                 prop.classList.add('prop-burst');
                 
-                // Blast the props outward in a random circle
                 const angle = Math.random() * Math.PI * 2;
                 const distance = Math.random() * 60 + 40; 
                 const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance - 40; // Bias upward slightly
+                const ty = Math.sin(angle) * distance - 40; 
 
                 prop.style.setProperty('--tx', `${tx}px`);
                 prop.style.setProperty('--ty', `${ty}px`);
@@ -397,8 +397,6 @@
                 prop.style.top = `${y}px`;
 
                 document.body.appendChild(prop);
-
-                // Remove prop after animation completes
                 setTimeout(() => prop.remove(), 1000);
             }
         }
@@ -408,8 +406,6 @@
             
             if (index === expectedOrder[currentStep]) {
                 element.classList.add('blown');
-                
-                // Trigger the beautiful explosion!
                 triggerPropBurst(element, currentStep);
                 
                 const quoteDisplay = document.getElementById('quote-display');
