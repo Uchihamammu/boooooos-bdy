@@ -25,7 +25,6 @@
             transition: transform 0.2s ease-in-out;
             animation: bounce 2s infinite;
             z-index: 10;
-            /* Prevents blue highlight when tapping on mobile */
             -webkit-tap-highlight-color: transparent; 
         }
 
@@ -33,7 +32,7 @@
             transform: scale(1.1) rotate(5deg);
         }
 
-        /* The Surprise Inside (Mobile Friendly Width) */
+        /* The Surprise Inside */
         #surprise {
             display: none;
             opacity: 0;
@@ -43,8 +42,10 @@
             background: white;
             border-radius: 20px;
             box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
-            width: 85%; /* Scales down for phones */
-            max-width: 400px; /* Won't get too wide on iPads/desktops */
+            width: 90%; 
+            max-width: 420px; 
+            max-height: 90vh; /* Prevents it from being too tall on small screens */
+            overflow-y: auto; /* Lets her scroll if the screen is super small */
             z-index: 10;
             box-sizing: border-box;
         }
@@ -57,32 +58,41 @@
 
         h1 { 
             color: #ff4d4d; 
-            margin-bottom: 10px; 
-            font-size: 28px; /* Adjusted for smaller screens */
+            margin-bottom: 5px; 
+            font-size: 28px; 
+            margin-top: 0;
         }
         
+        /* The Text - Now longer and more romantic */
         p { 
-            color: #555; 
+            color: #444; 
             line-height: 1.6; 
-            font-size: 16px; /* Slightly smaller for mobile readability */
-            margin: 0;
+            font-size: 16px; 
+            margin: 10px 0;
+            padding: 0 10px;
         }
         
-        /* Responsive Image */
+        /* FIXED IMAGE - No more cropping! Keeps original proportions */
         img {
             width: 100%; 
-            max-width: 250px; 
-            height: auto; 
-            aspect-ratio: 1 / 1; 
-            object-fit: cover;
+            max-width: 280px; 
+            height: auto; /* This prevents the cropping */
             border-radius: 15px;
             margin: 15px 0;
             border: 3px solid #ff4d4d;
+            box-shadow: 0px 5px 15px rgba(255, 77, 77, 0.3);
         }
 
-        .cake { font-size: 50px; margin: 10px 0; }
+        .cake { font-size: 50px; margin: 0; }
 
-        /* Falling Roses Animation */
+        /* The Beating Love Heart */
+        .beating-heart {
+            font-size: 45px;
+            margin-top: 10px;
+            animation: pulse 1s infinite;
+        }
+
+        /* Falling Roses & Hearts Animation */
         .falling-item {
             position: absolute;
             top: -10%;
@@ -90,6 +100,12 @@
             user-select: none;
             pointer-events: none;
             animation: fall linear forwards;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
         @keyframes fall {
@@ -109,46 +125,48 @@
             to { opacity: 1; transform: scale(1); }
         }
         
-        /* Small screen adjustments */
         @media (max-width: 350px) {
             h1 { font-size: 24px; }
             #gift-box { font-size: 80px; }
+            p { font-size: 14.5px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- The Gift Box she clicks -->
     <div id="gift-box" onclick="openGift()">
         🎁<br>
         <span style="font-size: 20px; color: #ff4d4d; font-weight: bold;">Tap to open!</span>
     </div>
 
-    <!-- The Surprise that appears -->
     <div id="surprise">
-        <h1>Happy Birthday, Bhumika! ❤️</h1>
+        <h1>Happy Birthday!</h1>
         
         <div class="cake">🎂</div>
         
-        <!-- MAKE SURE YOUR PHOTO IS NAMED EXACTLY photo.jpg -->
+        <!-- Un-cropped photo -->
         <img src="photo.jpg" alt="Us">
         
-        <!-- LOVE WORDS -->
+        <!-- Expanded Love Words -->
         <p>
-            To my beautiful booo,<br><br>
-            You mean the absolute world to me. I hope your special day is as beautiful, 
-            amazing, and pure as you are. I love you more than words can say!
+            To my beautiful booo, <br><br>
+            Every single day with you is a blessing, and I am so incredibly grateful to have you in my life. You are my sunshine, my biggest supporter, and my absolute favorite person in the whole world. 
+            <br><br>
+            I hope your special day is filled with as much joy, pure love, and happiness as you bring to my life every day. I love you more than words can ever express, today and always!
         </p>
+
+        <!-- The Beating Love Heart -->
+        <div class="beating-heart">❤️</div>
     </div>
 
-    <!-- MAKE SURE YOUR AUDIO IS NAMED EXACTLY song.mp3 -->
     <audio id="bday-song" src="song.mp3"></audio>
 
     <script>
         function createFallingItem() {
             const item = document.createElement('div');
             
-            const elements = ['🌹', '🤍', '🥀', '✨'];
+            // Replaced white hearts with bright red and sparkling ones so they show up better
+            const elements = ['🌹', '❤️', '💖', '✨'];
             item.innerText = elements[Math.floor(Math.random() * elements.length)];
             
             item.classList.add('falling-item');
