@@ -46,32 +46,62 @@
         .candles {
             display: flex;
             justify-content: center;
-            gap: 5px; 
-            margin-bottom: -40px; 
+            gap: 12px; 
+            margin-bottom: -25px; /* Pulls candles down into the cake */
             z-index: 2;
             position: relative;
         }
 
+        /* CUSTOM CSS CANDLES */
         .candle {
-            font-size: 60px; 
-            padding: 10px; 
+            position: relative;
+            padding: 25px 5px 10px 5px; /* Invisible tap padding */
             cursor: pointer;
-            transition: transform 0.1s ease, filter 0.1s ease; 
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation; 
-            animation: flicker 1s infinite alternate;
         }
 
-        .candle:hover {
-            transform: scale(1.1);
+        .wax {
+            width: 26px;
+            height: 65px;
+            background: linear-gradient(to right, #fdfdfd, #e6e6e6, #fdfdfd);
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.2s;
         }
 
-        .candle.blown {
-            filter: grayscale(100%);
-            opacity: 0.3;
-            transform: scale(0.9);
-            pointer-events: none; 
-            animation: none !important; 
+        .wick {
+            position: absolute;
+            width: 2px;
+            height: 12px;
+            background: #333;
+            top: 15px; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* The Animated Flame */
+        .flame {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 16px;
+            height: 26px;
+            background: radial-gradient(ellipse at bottom, #fff 10%, #ffeb3b 40%, #ff9800 80%, transparent 100%);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 -5px 15px 2px #ff9800;
+            transform-origin: bottom center;
+            animation: real-flicker 0.1s infinite alternate;
+            z-index: 3;
+        }
+
+        /* When the candle is blown out */
+        .candle.blown .flame {
+            display: none; /* Fire vanishes instantly */
+        }
+        .candle.blown .wax {
+            background: #b3b3b3; /* Wax goes dark */
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
         }
 
         .shake {
@@ -114,7 +144,6 @@
             box-sizing: border-box;
         }
 
-        /* Slower, more elegant fade-in for the surprise */
         .show-surprise {
             display: flex !important;
             animation: fadeIn 2.5s forwards; 
@@ -161,6 +190,12 @@
             animation: fall linear forwards;
         }
 
+        @keyframes real-flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.9; }
+            50% { transform: translateX(-50%) scale(1.1) rotate(2deg); opacity: 1; box-shadow: 0 -5px 20px 4px #ff9800; }
+            100% { transform: translateX(-50%) scale(0.9) rotate(-1deg); opacity: 0.8; }
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.2); }
@@ -176,11 +211,6 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        @keyframes flicker {
-            from { transform: rotate(-2deg); }
-            to { transform: rotate(2deg); }
-        }
-
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-5px) rotate(-5deg); }
@@ -190,7 +220,8 @@
         @media (max-width: 350px) {
             #candle-stage h1 { font-size: 26px; }
             .cake-emoji { font-size: 110px; }
-            .candle { font-size: 45px; padding: 5px; } 
+            .wax { width: 20px; height: 50px; }
+            .gap { gap: 8px; }
             #surprise h1 { font-size: 24px; }
             #surprise p { font-size: 14.5px; }
         }
@@ -204,11 +235,21 @@
         
         <div class="cake-container">
             <div class="candles">
-                <div class="candle" onclick="blowCandle(this, 0)">🕯️</div>
-                <div class="candle" onclick="blowCandle(this, 1)">🕯️</div>
-                <div class="candle" onclick="blowCandle(this, 2)">🕯️</div>
-                <div class="candle" onclick="blowCandle(this, 3)">🕯️</div>
-                <div class="candle" onclick="blowCandle(this, 4)">🕯️</div>
+                <div class="candle" onclick="blowCandle(this, 0)">
+                    <div class="flame"></div><div class="wick"></div><div class="wax"></div>
+                </div>
+                <div class="candle" onclick="blowCandle(this, 1)">
+                    <div class="flame"></div><div class="wick"></div><div class="wax"></div>
+                </div>
+                <div class="candle" onclick="blowCandle(this, 2)">
+                    <div class="flame"></div><div class="wick"></div><div class="wax"></div>
+                </div>
+                <div class="candle" onclick="blowCandle(this, 3)">
+                    <div class="flame"></div><div class="wick"></div><div class="wax"></div>
+                </div>
+                <div class="candle" onclick="blowCandle(this, 4)">
+                    <div class="flame"></div><div class="wick"></div><div class="wax"></div>
+                </div>
             </div>
             <div class="cake-emoji">🎂</div>
         </div>
@@ -261,7 +302,7 @@
                     currentStep++;
 
                     if (currentStep === 5) {
-                        // Increased this wait time so she has 3.5 seconds to read the final quote!
+                        // Delay reduced to exactly 2 seconds!
                         setTimeout(() => {
                             document.getElementById('candle-stage').style.display = 'none';
                             document.getElementById('surprise').classList.add('show-surprise');
@@ -270,7 +311,7 @@
                             audio.play();
                             
                             setInterval(createFallingItem, 300);
-                        }, 3500); 
+                        }, 2000); 
                     }
                 }, 100);
             } else {
